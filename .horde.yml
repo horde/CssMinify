@@ -5,3 +5,27 @@ full: CSS minification library
 description: Abstracted interface to various CSS minification backends.
 list: dev
 type: library
+authors:
+  -
+    name: Michael Slusarz
+    user: slusarz
+    email: slusarz@horde.org
+    active: true
+    role: lead
+version:
+  release: 1.0.5
+  api: 1.0.0
+state:
+  release: stable
+  api: stable
+license:
+  identifier: LGPL-2.1
+  uri: http://www.horde.org/licenses/lgpl21
+dependencies:
+  required:
+    php: ^5.3 || ^7
+    pear:
+      pear.horde.org/Horde_Css_Parser: ^1
+      pear.horde.org/Horde_Exception: ^2
+      pear.horde.org/Horde_Log: ^2
+      pear.horde.org/Horde_Url: ^2
