@@ -1,0 +1,38 @@
+----------
+v1.0.5-git
+----------
+
+
+------
+v1.0.4
+------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v1.0.3
+------
+
+[jan] Fix minifying @font-face src attributes.
+
+
+------
+v1.0.2
+------
+
+[mms] Correctly handle full URLs in background-* properties.
+
+
+------
+v1.0.1
+------
+
+[mms] Fix Horde_CssMinify_CssParser#setOptions().
+
+
+------
+v1.0.0
+------
+
+[mms] Initial release.

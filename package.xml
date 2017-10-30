@@ -10,7 +10,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-09-19</date>
+ <date>2017-10-30</date>
  <version>
   <release>1.0.5</release>
   <api>1.0.0</api>
@@ -28,6 +28,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="CssMinify">
+      <file name="CHANGES" role="doc" />
       <file name="COPYING" role="doc" />
      </dir> <!-- /doc/Horde/CssMinify -->
      </dir> <!-- /doc/Horde -->
@@ -85,6 +86,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/CssMinify/CHANGES" />
    <install as="COPYING" name="doc/Horde/CssMinify/COPYING" />
    <install as="Horde/CssMinify.php" name="lib/Horde/CssMinify.php" />
    <install as="Horde/CssMinify/CssParser.php" name="lib/Horde/CssMinify/CssParser.php" />
@@ -166,7 +168,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-09-19</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
