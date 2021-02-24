@@ -31,9 +31,6 @@
     "autoload": {
         "psr-0": {
             "Horde_CssMinify": "lib/"
-        },
-        "psr-4": {
-            "Horde\\CssMinify\\": "src/"
         }
     }
 }
