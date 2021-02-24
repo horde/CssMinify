@@ -1,7 +1,7 @@
 {
     "name": "horde/cssminify",
     "description": "CSS minification library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org",
     "license": "LGPL-2.1",
     "authors": [
@@ -11,28 +11,29 @@
             "role": "lead"
         }
     ],
-    "version": "1.0.5",
-    "time": "2017-11-11",
+    "version": "2.0.0alpha1",
+    "time": "2021-02-24",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com/"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "*",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Css_Parser": "^1",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Log": "^2",
-        "pear-pear.horde.org/Horde_Url": "^2"
+        "horde/css_parser": "^1",
+        "horde/exception": "^2",
+        "horde/log": "^2",
+        "horde/url": "^2"
     },
-    "replace": {
-        "pear-pear.horde.org/Horde_CssMinify": "1.*",
-        "pear-horde/Horde_CssMinify": "1.*"
-    },
+    "suggest": {},
     "autoload": {
         "psr-0": {
             "Horde_CssMinify": "lib/"
+        },
+        "psr-4": {
+            "Horde\\CssMinify\\": "src/"
         }
     }
 }
