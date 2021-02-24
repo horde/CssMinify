@@ -21,11 +21,11 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/css_parser": "^1",
-        "horde/exception": "^2",
-        "horde/log": "^2",
-        "horde/url": "^2"
+        "php": "^7",
+        "horde/css_parser": "^2",
+        "horde/exception": "^3",
+        "horde/log": "^3",
+        "horde/url": "^3"
     },
     "suggest": {},
     "autoload": {
