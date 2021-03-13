@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "name": "horde/cssminify",
     "description": "CSS minification library",
     "type": "library",
@@ -20,10 +21,10 @@
     ],
     "require": {
         "php": "^7",
-        "horde/css_parser": "^2",
-        "horde/exception": "^3",
-        "horde/log": "^3",
-        "horde/url": "^3"
+        "horde/css_parser": "^2 || dev-FRAMEWORK_6_0",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/log": "^3 || dev-FRAMEWORK_6_0",
+        "horde/url": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {},
     "autoload": {
