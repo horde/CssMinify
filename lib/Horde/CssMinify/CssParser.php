@@ -51,6 +51,11 @@ class Horde_CssMinify_CssParser extends Horde_CssMinify
     }
 
     /**
+     * @todo Architecture violation: Uses Sabberworm APIs directly instead of Horde_Css_Parser.
+     *       Lines 80-86: Import processing (getContents, Property\Import, getLocation, remove)
+     *       Lines 90-110: URL extraction (getAllRuleSets, getRules with prefix, getValue, nested traversal)
+     *       Lines 113-124: URL modification (getURL, getString, setString)
+     *       See: ~/php/horde-development/sabberworm-architecture-violations.md
      */
     protected function _minify($data)
     {
