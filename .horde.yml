@@ -13,7 +13,7 @@ authors:
     active: false
     role: lead
 version:
-  release: 2.0.0-beta1
+  release: 2.0.0-beta2
   api: 2.0.0alpha1
 state:
   release: beta
@@ -25,10 +25,11 @@ dependencies:
   required:
     php: ^8
     composer:
-      horde/css_parser: ^2
+      horde/css_parser: ^2.0.0-beta4
       horde/exception: ^3
       horde/log: ^3
       horde/url: ^3
+      psr/log: ^3
 quality:
   phpstan:
     level: 9
