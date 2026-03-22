@@ -11,23 +11,31 @@
             "role": "lead"
         }
     ],
-    "time": "2026-03-15",
+    "time": "2026-03-22",
     "repositories": [],
     "require": {
         "php": "^8",
-        "horde/css_parser": "^2 || dev-FRAMEWORK_6_0",
+        "horde/css_parser": "^2.0.0-beta4 || dev-FRAMEWORK_6_0",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "horde/log": "^3 || dev-FRAMEWORK_6_0",
-        "horde/url": "^3 || dev-FRAMEWORK_6_0"
+        "horde/url": "^3 || dev-FRAMEWORK_6_0",
+        "psr/log": "^3"
     },
     "require-dev": {},
     "suggest": {},
     "autoload": {
         "psr-0": {
             "Horde_CssMinify": "lib/"
+        },
+        "psr-4": {
+            "Horde\\CssMinify\\": "src/"
         }
     },
-    "autoload-dev": {},
+    "autoload-dev": {
+        "psr-4": {
+            "Horde\\CssMinify\\Test\\": "test/"
+        }
+    },
     "config": {
         "allow-plugins": {}
     },
