@@ -1,0 +1,7 @@
+@media (min-width: 768px) {
+    body { font-size: 16px; }
+    .container { max-width: 1200px; }
+}
+.button:hover { background: blue; }
+.button:active { background: darkblue; }
+.nav > li { display: inline-block; }

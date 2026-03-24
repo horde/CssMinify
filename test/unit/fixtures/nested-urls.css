@@ -1,0 +1,6 @@
+body {
+    background: linear-gradient(to bottom, red, blue), url(bg.png);
+}
+.complex {
+    background: radial-gradient(circle, white, black), linear-gradient(red, yellow), url(pattern.png);
+}

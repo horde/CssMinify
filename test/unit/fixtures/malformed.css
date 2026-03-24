@@ -1,0 +1,3 @@
+body { color: }  /* Missing value */
+.broken { margin: 10px  /* Missing closing brace */
+.valid { padding: 5px; }

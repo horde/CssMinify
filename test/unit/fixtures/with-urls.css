@@ -1,0 +1,11 @@
+body {
+    background-image: url(../images/bg.png);
+    background-size: cover;
+}
+.logo {
+    background: url("logo.svg") no-repeat center;
+}
+@font-face {
+    font-family: 'Custom';
+    src: url(fonts/custom.ttf) format('truetype');
+}
