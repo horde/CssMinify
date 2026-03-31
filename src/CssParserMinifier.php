@@ -22,6 +22,8 @@ use Horde\CssMinify\Input\StringInput;
 use Horde\CssMinify\Input\FileCollectionInput;
 use Horde\CssMinify\Input\CssFile;
 use Psr\Log\LogLevel;
+use Exception;
+use InvalidArgumentException;
 
 /**
  * CSS minification using modern Horde\Css\Parser API.
@@ -48,7 +50,7 @@ final class CssParserMinifier extends Minifier
         try {
             $parser = new Parser($input->css);
             return $parser->compress();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->settings->logger->log(
                 LogLevel::ERROR,
                 'CSS parse error: ' . $e->getMessage()
@@ -82,7 +84,7 @@ final class CssParserMinifier extends Minifier
             $parser = $this->processUrls($parser, $file);
 
             return $importOutput . $parser->compress();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->settings->logger->log(
                 LogLevel::ERROR,
                 "CSS parse error in {$file->filepath}: " . $e->getMessage()
@@ -115,7 +117,7 @@ final class CssParserMinifier extends Minifier
             try {
                 $importedFile = new CssFile($uri, $filepath);
                 $output .= $this->minifyFile($importedFile);
-            } catch (\InvalidArgumentException $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->settings->logger->log(
                     LogLevel::ERROR,
                     "Could not read imported file {$filepath}: " . $e->getMessage()
@@ -133,7 +135,8 @@ final class CssParserMinifier extends Minifier
         }
 
         return $parser->modifyUrls(function (string $urlString) use ($sourceFile): string {
-            $urlString = ltrim($urlString);
+            // Trim whitespace only, preserve leading slashes
+            $urlString = trim($urlString);
 
             // Skip absolute URLs and data URIs
             if (stripos($urlString, 'http') === 0 || $this->isDataUrl($urlString)) {

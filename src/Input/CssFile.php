@@ -45,6 +45,59 @@ final class CssFile
 
     public function resolveRelativeUrl(string $relativeUrl): string
     {
-        return dirname($this->uri) . '/' . $relativeUrl;
+        // Trim whitespace from the URL
+        $relativeUrl = trim($relativeUrl);
+
+        // Absolute URLs (starting with /) should not be resolved
+        if (str_starts_with($relativeUrl, '/')) {
+            return $relativeUrl;
+        }
+
+        // Protocol-relative URLs (starting with //) should not be resolved
+        if (str_starts_with($relativeUrl, '//')) {
+            return $relativeUrl;
+        }
+
+        // Resolve relative URL against the CSS file's directory
+        $baseDir = dirname($this->uri);
+        $resolved = $baseDir . '/' . $relativeUrl;
+
+        // Normalize path: remove double slashes and resolve . and ..
+        return $this->normalizePath($resolved);
+    }
+
+    private function normalizePath(string $path): string
+    {
+        // Remove consecutive slashes
+        $path = preg_replace('#/+#', '/', $path);
+
+        // Split path and process . and .. components
+        $parts = explode('/', $path);
+        $normalized = [];
+
+        foreach ($parts as $part) {
+            // Skip empty parts (except leading slash creates one empty part)
+            if ($part === '' && !empty($normalized)) {
+                continue;
+            }
+
+            // Skip current directory references
+            if ($part === '.') {
+                continue;
+            }
+
+            // Handle parent directory references
+            if ($part === '..') {
+                // Don't pop past root
+                if (!empty($normalized) && end($normalized) !== '') {
+                    array_pop($normalized);
+                }
+                continue;
+            }
+
+            $normalized[] = $part;
+        }
+
+        return implode('/', $normalized);
     }
 }
