@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2014-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -33,7 +34,7 @@ class Horde_CssMinify_CssParser extends Horde_CssMinify
      *             back with two elements (URI, filename).
      * </pre>
      */
-    public function setOptions(array $opts = array())
+    public function setOptions(array $opts = [])
     {
         parent::setOptions($opts);
     }
@@ -85,13 +86,13 @@ class Horde_CssMinify_CssParser extends Horde_CssMinify
                 foreach ($parser->doc->getContents() as $val) {
                     if ($val instanceof Sabberworm\CSS\Property\Import) {
                         $res = call_user_func($this->_opts['import'], dirname($uri) . '/' . $val->getLocation()->getURL()->getString());
-                        $out .= $this->_minify(array($res[0] => $res[1]));
+                        $out .= $this->_minify([$res[0] => $res[1]]);
                         $parser->doc->remove($val);
                     }
                 }
             }
 
-            $url = array();
+            $url = [];
             foreach ($parser->doc->getAllRuleSets() as $val) {
                 foreach (array_merge($val->getRules('background-'), $val->getRules('src')) as $val2) {
                     $item = $val2->getValue();
@@ -118,8 +119,8 @@ class Horde_CssMinify_CssParser extends Horde_CssMinify
                 $url_ob = $val->getURL();
                 $url_str = ltrim($url_ob->getString());
 
-                if ((stripos($url_str, 'http') !== 0) &&
-                    !Horde_Url_Data::isData($url_str)) {
+                if ((stripos($url_str, 'http') !== 0)
+                    && !Horde_Url_Data::isData($url_str)) {
                     $url_str = dirname($uri) . '/' . $url_str;
                     if (!empty($this->_opts['dataurl'])) {
                         $url_str = call_user_func($this->_opts['dataurl'], $url_str);
