@@ -130,10 +130,6 @@ final class CssParserMinifier extends Minifier
 
     private function processUrls(Parser $parser, CssFile $sourceFile): Parser
     {
-        if ($this->settings->dataUrlCallback === null) {
-            return $parser;
-        }
-
         return $parser->modifyUrls(function (string $urlString) use ($sourceFile): string {
             // Trim whitespace only, preserve leading slashes
             $urlString = trim($urlString);
@@ -143,9 +139,16 @@ final class CssParserMinifier extends Minifier
                 return $urlString;
             }
 
-            // Resolve relative URL and apply callback
+            // Resolve relative URL to absolute path
             $resolved = $sourceFile->resolveRelativeUrl($urlString);
-            return ($this->settings->dataUrlCallback)($resolved);
+
+            // Apply dataurl callback if configured (converts to base64 or returns URI)
+            if ($this->settings->dataUrlCallback !== null) {
+                return ($this->settings->dataUrlCallback)($resolved);
+            }
+
+            // No callback: return the resolved absolute path
+            return $resolved;
         });
     }
 
