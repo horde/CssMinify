@@ -53,14 +53,14 @@ class ImportProcessingTest extends TestCase
         $data = ['with-imports.css' => $this->fixturesPath . 'with-imports.css'];
 
         $callbackInvoked = false;
-        $importCallback = function($path) use (&$callbackInvoked) {
+        $importCallback = function ($path) use (&$callbackInvoked) {
             $callbackInvoked = true;
             // Return [uri, filename] for the imported file
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -80,12 +80,12 @@ class ImportProcessingTest extends TestCase
     {
         $data = ['with-imports.css' => $this->fixturesPath . 'with-imports.css'];
 
-        $importCallback = function($path) {
+        $importCallback = function ($path) {
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -102,14 +102,14 @@ class ImportProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $importCount = 0;
-        $importCallback = function($path) use (&$importCount) {
+        $importCallback = function ($path) use (&$importCount) {
             $importCount++;
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $data = ['temp.css' => $tempFile];
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -125,7 +125,7 @@ class ImportProcessingTest extends TestCase
     {
         $data = ['nested-imports.css' => $this->fixturesPath . 'nested-imports.css'];
 
-        $importCallback = function($path) {
+        $importCallback = function ($path) {
             // Map import paths to actual files
             if (strpos($path, 'with-imports.css') !== false) {
                 return [$path, __DIR__ . '/fixtures/with-imports.css'];
@@ -137,7 +137,7 @@ class ImportProcessingTest extends TestCase
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -152,13 +152,13 @@ class ImportProcessingTest extends TestCase
         $data = ['subdir/test.css' => $this->fixturesPath . 'with-imports.css'];
 
         $receivedPath = '';
-        $importCallback = function($path) use (&$receivedPath) {
+        $importCallback = function ($path) use (&$receivedPath) {
             $receivedPath = $path;
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -172,14 +172,14 @@ class ImportProcessingTest extends TestCase
     {
         $data = ['css/main.css' => $this->fixturesPath . 'with-imports.css'];
 
-        $importCallback = function($path) {
+        $importCallback = function ($path) {
             // Verify relative path resolution (dirname logic)
             $this->assertStringContainsString('css/', $path);
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();
@@ -204,13 +204,13 @@ class ImportProcessingTest extends TestCase
         $tempFile = $this->fixturesPath . 'temp-malformed-import.css';
         file_put_contents($tempFile, $css);
 
-        $importCallback = function($path) {
+        $importCallback = function ($path) {
             return [$path, __DIR__ . '/fixtures/shared.css'];
         };
 
         $data = ['temp.css' => $tempFile];
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         // Should not throw
@@ -229,7 +229,7 @@ class ImportProcessingTest extends TestCase
         $data = ['nested-imports.css' => $this->fixturesPath . 'nested-imports.css'];
 
         $callCount = 0;
-        $importCallback = function($path) use (&$callCount) {
+        $importCallback = function ($path) use (&$callCount) {
             $callCount++;
             // Limit recursion depth in test
             if ($callCount > 5) {
@@ -242,7 +242,7 @@ class ImportProcessingTest extends TestCase
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'import' => $importCallback
+            'import' => $importCallback,
         ]);
 
         $result = $minifier->minify();

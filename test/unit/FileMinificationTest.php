@@ -54,7 +54,7 @@ class FileMinificationTest extends TestCase
     {
         $data = [
             'simple.css' => $this->fixturesPath . 'simple.css',
-            'multiple-rules.css' => $this->fixturesPath . 'multiple-rules.css'
+            'multiple-rules.css' => $this->fixturesPath . 'multiple-rules.css',
         ];
         $minifier = new Horde_CssMinify_CssParser($data);
 
@@ -110,7 +110,7 @@ class FileMinificationTest extends TestCase
     {
         $data = [
             'simple.css' => $this->fixturesPath . 'simple.css',
-            'multiple-rules.css' => $this->fixturesPath . 'multiple-rules.css'
+            'multiple-rules.css' => $this->fixturesPath . 'multiple-rules.css',
         ];
         $minifier = new Horde_CssMinify_CssParser($data);
 
@@ -138,7 +138,7 @@ class FileMinificationTest extends TestCase
     {
         $data = [
             'simple.css' => $this->fixturesPath . 'simple.css',
-            'complex.css' => $this->fixturesPath . 'complex.css'
+            'complex.css' => $this->fixturesPath . 'complex.css',
         ];
         $minifier = new Horde_CssMinify_CssParser($data);
 

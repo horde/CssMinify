@@ -61,7 +61,7 @@ class ImportProcessingTest extends TestCase
         );
 
         $callbackInvoked = false;
-        $importCallback = new ImportCallback(function($path) use (&$callbackInvoked) {
+        $importCallback = new ImportCallback(function ($path) use (&$callbackInvoked) {
             $callbackInvoked = true;
             // Return [uri, filename] for the imported file
             return [$path, __DIR__ . '/../fixtures/shared.css'];
@@ -88,7 +88,7 @@ class ImportProcessingTest extends TestCase
             new CssFile('with-imports.css', $this->fixturesPath . 'with-imports.css')
         );
 
-        $importCallback = new ImportCallback(function($path) {
+        $importCallback = new ImportCallback(function ($path) {
             return [$path, __DIR__ . '/../fixtures/shared.css'];
         });
 
@@ -108,7 +108,7 @@ class ImportProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $importCount = 0;
-        $importCallback = new ImportCallback(function($path) use (&$importCount) {
+        $importCallback = new ImportCallback(function ($path) use (&$importCount) {
             $importCount++;
             return [$path, __DIR__ . '/../fixtures/shared.css'];
         });
@@ -133,7 +133,7 @@ class ImportProcessingTest extends TestCase
             new CssFile('nested-imports.css', $this->fixturesPath . 'nested-imports.css')
         );
 
-        $importCallback = new ImportCallback(function($path) {
+        $importCallback = new ImportCallback(function ($path) {
             // Map import paths to actual files
             if (strpos($path, 'with-imports.css') !== false) {
                 return [$path, __DIR__ . '/../fixtures/with-imports.css'];
@@ -160,7 +160,7 @@ class ImportProcessingTest extends TestCase
         );
 
         $receivedPath = '';
-        $importCallback = new ImportCallback(function($path) use (&$receivedPath) {
+        $importCallback = new ImportCallback(function ($path) use (&$receivedPath) {
             $receivedPath = $path;
             return [$path, __DIR__ . '/../fixtures/shared.css'];
         });
@@ -180,7 +180,7 @@ class ImportProcessingTest extends TestCase
             new CssFile('css/main.css', $this->fixturesPath . 'with-imports.css')
         );
 
-        $importCallback = new ImportCallback(function($path) {
+        $importCallback = new ImportCallback(function ($path) {
             // Verify relative path resolution (dirname logic)
             $this->assertStringContainsString('css/', $path);
             return [$path, __DIR__ . '/../fixtures/shared.css'];
@@ -219,7 +219,7 @@ class ImportProcessingTest extends TestCase
         );
 
         $callCount = 0;
-        $importCallback = new ImportCallback(function($path) use (&$callCount) {
+        $importCallback = new ImportCallback(function ($path) use (&$callCount) {
             $callCount++;
             // Limit recursion depth in test
             if ($callCount > 5) {

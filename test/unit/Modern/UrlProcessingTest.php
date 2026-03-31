@@ -49,7 +49,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -60,7 +60,7 @@ class UrlProcessingTest extends TestCase
 
         // Should have detected background-image URL
         $this->assertNotEmpty($urlsFound);
-        $this->assertGreaterThan(0, count(array_filter($urlsFound, function($url) {
+        $this->assertGreaterThan(0, count(array_filter($urlsFound, function ($url) {
             return strpos($url, 'bg.png') !== false || strpos($url, 'logo.svg') !== false;
         })));
     }
@@ -72,7 +72,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -99,7 +99,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -127,7 +127,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -153,7 +153,7 @@ class UrlProcessingTest extends TestCase
             new CssFile('subdir/test.css', $this->fixturesPath . 'with-urls.css')
         );
 
-        $dataUrlCallback = new UrlCallback(function($path) {
+        $dataUrlCallback = new UrlCallback(function ($path) {
             // Should receive absolute path with dirname prepended
             return $path;
         });
@@ -173,7 +173,7 @@ class UrlProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -199,7 +199,7 @@ class UrlProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -225,7 +225,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $callbackInvoked = false;
-        $dataUrlCallback = new UrlCallback(function($path) use (&$callbackInvoked) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$callbackInvoked) {
             $callbackInvoked = true;
             // Convert to data URL
             return 'data:image/png;base64,FAKEDATA';
@@ -249,7 +249,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $receivedPaths = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$receivedPaths) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$receivedPaths) {
             $receivedPaths[] = $path;
             return $path;
         });
@@ -258,10 +258,16 @@ class UrlProcessingTest extends TestCase
 
         $result = $minifier->minify();
 
-        // Paths should have dirname prepended
-        foreach ($receivedPaths as $path) {
-            $this->assertStringContainsString('css/', $path);
-        }
+        // Verify paths are resolved correctly
+        // with-urls.css contains:
+        // - url(../images/bg.png) => resolves to images/bg.png (normalized: css/../images -> images)
+        // - url("logo.svg") => resolves to css/logo.svg
+        // - url(fonts/custom.ttf) => resolves to css/fonts/custom.ttf
+
+        $this->assertCount(3, $receivedPaths, 'Should process all 3 URLs');
+        $this->assertContains('images/bg.png', $receivedPaths, 'Parent-relative URL normalized');
+        $this->assertContains('css/logo.svg', $receivedPaths, 'Simple relative URL');
+        $this->assertContains('css/fonts/custom.ttf', $receivedPaths, 'Nested relative URL');
     }
 
     public function testMinifyMultipleUrlsInSameRule(): void
@@ -271,7 +277,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -291,7 +297,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $urlsFound = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$urlsFound) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         });
@@ -310,7 +316,7 @@ class UrlProcessingTest extends TestCase
             new CssFile('with-urls.css', $this->fixturesPath . 'with-urls.css')
         );
 
-        $dataUrlCallback = new UrlCallback(function($path) {
+        $dataUrlCallback = new UrlCallback(function ($path) {
             // Rewrite path
             return '/cdn' . $path;
         });
@@ -330,7 +336,7 @@ class UrlProcessingTest extends TestCase
         );
 
         $receivedPaths = [];
-        $dataUrlCallback = new UrlCallback(function($path) use (&$receivedPaths) {
+        $dataUrlCallback = new UrlCallback(function ($path) use (&$receivedPaths) {
             $receivedPaths[] = $path;
             return $path;
         });
@@ -352,7 +358,7 @@ class UrlProcessingTest extends TestCase
         $tempFile = $this->fixturesPath . 'temp-malformed-url.css';
         file_put_contents($tempFile, $css);
 
-        $dataUrlCallback = new UrlCallback(function($path) {
+        $dataUrlCallback = new UrlCallback(function ($path) {
             return $path;
         });
 
@@ -374,7 +380,7 @@ class UrlProcessingTest extends TestCase
             new CssFile('with-urls.css', $this->fixturesPath . 'with-urls.css')
         );
 
-        $dataUrlCallback = new UrlCallback(function($path) {
+        $dataUrlCallback = new UrlCallback(function ($path) {
             return $path;
         });
 

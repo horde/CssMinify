@@ -24,6 +24,7 @@ use Horde\CssMinify\UrlCallback;
 use Horde\CssMinify\ImportCallback;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 /**
  * Tests for modern PSR-4 API (src/).
@@ -116,7 +117,7 @@ class ModernApiTest extends TestCase
 
     public function testCssFileValidatesReadability(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('File not readable');
 
         new CssFile('missing.css', '/nonexistent/path.css');

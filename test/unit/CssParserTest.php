@@ -92,10 +92,10 @@ class CssParserTest extends TestCase
         $callbackCalled = false;
 
         $minifier = new Horde_CssMinify_CssParser($css, [
-            'import' => function($path) use (&$callbackCalled) {
+            'import' => function ($path) use (&$callbackCalled) {
                 $callbackCalled = true;
                 return [$path, ''];
-            }
+            },
         ]);
 
         $result = $minifier->minify();

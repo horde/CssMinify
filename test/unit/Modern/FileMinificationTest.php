@@ -22,6 +22,7 @@ use Horde\CssMinify\Settings;
 use Psr\Log\NullLogger;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 /**
  * Tests for modern file-based minification (equivalent to FileMinificationTest).
@@ -73,7 +74,7 @@ class FileMinificationTest extends TestCase
     public function testMinifyUnreadableFileLogsError(): void
     {
         // CssFile constructor throws on unreadable files
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('File not readable');
 
         new CssFile('missing.css', $this->fixturesPath . 'nonexistent.css');

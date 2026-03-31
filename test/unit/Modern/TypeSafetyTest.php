@@ -25,6 +25,8 @@ use Horde\CssMinify\ImportCallback;
 use Psr\Log\NullLogger;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
+use ReflectionClass;
 
 /**
  * Tests for new type-safe features in modern API.
@@ -80,7 +82,7 @@ class TypeSafetyTest extends TestCase
     public function testUrlCallbackInvoke(): void
     {
         $invoked = false;
-        $urlCallback = new UrlCallback(function($path) use (&$invoked) {
+        $urlCallback = new UrlCallback(function ($path) use (&$invoked) {
             $invoked = true;
             return '/rewritten' . $path;
         });
@@ -94,7 +96,7 @@ class TypeSafetyTest extends TestCase
     public function testImportCallbackInvoke(): void
     {
         $invoked = false;
-        $importCallback = new ImportCallback(function($path) use (&$invoked) {
+        $importCallback = new ImportCallback(function ($path) use (&$invoked) {
             $invoked = true;
             return ['/uri/' . $path, '/filesystem/' . $path];
         });
@@ -115,7 +117,7 @@ class TypeSafetyTest extends TestCase
 
     public function testCssFileThrowsOnUnreadable(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('File not readable');
 
         new CssFile('missing.css', '/nonexistent/path.css');
@@ -138,7 +140,8 @@ class TypeSafetyTest extends TestCase
 
         $resolved = $file->resolveRelativeUrl('../images/bg.png');
 
-        $this->assertSame('css/themes/../images/bg.png', $resolved);
+        // Path should be normalized: css/themes/../images/bg.png => css/images/bg.png
+        $this->assertSame('css/images/bg.png', $resolved);
     }
 
     public function testFileCollectionInputEmpty(): void
@@ -203,7 +206,7 @@ class TypeSafetyTest extends TestCase
     public function testCallbackTypeSafetyEnforcement(): void
     {
         // UrlCallback enforces string return
-        $urlCallback = new UrlCallback(function($path): string {
+        $urlCallback = new UrlCallback(function ($path): string {
             return '/cdn' . $path;
         });
 
@@ -211,7 +214,7 @@ class TypeSafetyTest extends TestCase
         $this->assertIsString($result);
 
         // ImportCallback enforces array{0: string, 1: string} return
-        $importCallback = new ImportCallback(function($path): array {
+        $importCallback = new ImportCallback(function ($path): array {
             return [$path, '/path/' . $path];
         });
 
@@ -227,7 +230,7 @@ class TypeSafetyTest extends TestCase
         $minifier = new CssParserMinifier(new StringInput('body{}'));
 
         // Verify no Sabberworm types are exposed
-        $reflection = new \ReflectionClass($minifier);
+        $reflection = new ReflectionClass($minifier);
 
         // Check minify() return type
         $minifyMethod = $reflection->getMethod('minify');

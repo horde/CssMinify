@@ -42,20 +42,20 @@ class UrlProcessingTest extends TestCase
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
 
         // Should have detected background-image URL
         $this->assertNotEmpty($urlsFound);
-        $this->assertGreaterThan(0, count(array_filter($urlsFound, function($url) {
+        $this->assertGreaterThan(0, count(array_filter($urlsFound, function ($url) {
             return strpos($url, 'bg.png') !== false || strpos($url, 'logo.svg') !== false;
         })));
     }
@@ -65,13 +65,13 @@ class UrlProcessingTest extends TestCase
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -92,13 +92,13 @@ class UrlProcessingTest extends TestCase
         $data = ['nested-urls.css' => $this->fixturesPath . 'nested-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -120,13 +120,13 @@ class UrlProcessingTest extends TestCase
         $data = ['nested-urls.css' => $this->fixturesPath . 'nested-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -146,13 +146,13 @@ class UrlProcessingTest extends TestCase
     {
         $data = ['subdir/test.css' => $this->fixturesPath . 'with-urls.css'];
 
-        $dataUrlCallback = function($path) {
+        $dataUrlCallback = function ($path) {
             // Should receive absolute path with dirname prepended
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -168,14 +168,14 @@ class UrlProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $data = ['test.css' => $tempFile];
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -194,14 +194,14 @@ class UrlProcessingTest extends TestCase
         file_put_contents($tempFile, $css);
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $data = ['test.css' => $tempFile];
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -218,14 +218,14 @@ class UrlProcessingTest extends TestCase
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
         $callbackInvoked = false;
-        $dataUrlCallback = function($path) use (&$callbackInvoked) {
+        $dataUrlCallback = function ($path) use (&$callbackInvoked) {
             $callbackInvoked = true;
             // Convert to data URL
             return 'data:image/png;base64,FAKEDATA';
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -242,13 +242,13 @@ class UrlProcessingTest extends TestCase
         $data = ['css/main.css' => $this->fixturesPath . 'with-urls.css'];
 
         $receivedPaths = [];
-        $dataUrlCallback = function($path) use (&$receivedPaths) {
+        $dataUrlCallback = function ($path) use (&$receivedPaths) {
             $receivedPaths[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -264,13 +264,13 @@ class UrlProcessingTest extends TestCase
         $data = ['nested-urls.css' => $this->fixturesPath . 'nested-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -284,13 +284,13 @@ class UrlProcessingTest extends TestCase
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
         $urlsFound = [];
-        $dataUrlCallback = function($path) use (&$urlsFound) {
+        $dataUrlCallback = function ($path) use (&$urlsFound) {
             $urlsFound[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -303,13 +303,13 @@ class UrlProcessingTest extends TestCase
     {
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
-        $dataUrlCallback = function($path) {
+        $dataUrlCallback = function ($path) {
             // Rewrite path
             return '/cdn' . $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -323,13 +323,13 @@ class UrlProcessingTest extends TestCase
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
         $receivedPaths = [];
-        $dataUrlCallback = function($path) use (&$receivedPaths) {
+        $dataUrlCallback = function ($path) use (&$receivedPaths) {
             $receivedPaths[] = $path;
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();
@@ -347,13 +347,13 @@ class UrlProcessingTest extends TestCase
         $tempFile = $this->fixturesPath . 'temp-malformed-url.css';
         file_put_contents($tempFile, $css);
 
-        $dataUrlCallback = function($path) {
+        $dataUrlCallback = function ($path) {
             return $path;
         };
 
         $data = ['test.css' => $tempFile];
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         // Should not throw
@@ -367,12 +367,12 @@ class UrlProcessingTest extends TestCase
     {
         $data = ['with-urls.css' => $this->fixturesPath . 'with-urls.css'];
 
-        $dataUrlCallback = function($path) {
+        $dataUrlCallback = function ($path) {
             return $path;
         };
 
         $minifier = new Horde_CssMinify_CssParser($data, [
-            'dataurl' => $dataUrlCallback
+            'dataurl' => $dataUrlCallback,
         ]);
 
         $result = $minifier->minify();

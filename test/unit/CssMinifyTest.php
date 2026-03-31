@@ -20,6 +20,7 @@ use Horde_Log_Logger;
 use Horde_Log_Handler_Null;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Horde_CssMinify;
 
 /**
  * Tests for Horde_CssMinify base class functionality.
@@ -29,7 +30,7 @@ use PHPUnit\Framework\TestCase;
  * @license   http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package   CssMinify
  */
-#[CoversClass(\Horde_CssMinify::class)]
+#[CoversClass(Horde_CssMinify::class)]
 #[CoversClass(Horde_CssMinify_CssParser::class)]
 class CssMinifyTest extends TestCase
 {
@@ -55,7 +56,7 @@ class CssMinifyTest extends TestCase
         $logger = new Horde_Log_Logger(new Horde_Log_Handler_Null());
 
         $minifier = new Horde_CssMinify_CssParser($css, [
-            'logger' => $logger
+            'logger' => $logger,
         ]);
 
         // If this doesn't throw, logger was accepted
@@ -66,7 +67,7 @@ class CssMinifyTest extends TestCase
     {
         $css = 'body{color:red}';
         $minifier = new Horde_CssMinify_CssParser($css, [
-            'custom' => 'value'
+            'custom' => 'value',
         ]);
 
         // Options are stored, even if custom
