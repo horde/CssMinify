@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2014-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -34,7 +35,7 @@ abstract class Horde_CssMinify
      *
      * @var array
      */
-    protected $_opts = array();
+    protected $_opts = [];
 
     /**
      * Constructor.
@@ -44,7 +45,7 @@ abstract class Horde_CssMinify
      *                     containing the CSS data to compress.
      * @param array $opts  Additional options. See setOptions().
      */
-    public function __construct($css, array $opts = array())
+    public function __construct($css, array $opts = [])
     {
         if (!is_array($css) && !is_string($css)) {
             throw new InvalidArgumentException('First argument must either be an array or a string.');
@@ -70,13 +71,13 @@ abstract class Horde_CssMinify
      *   - logger: (Horde_Log_Logger) Log object to use for log messages.
      * </pre>
      */
-    public function setOptions(array $opts = array())
+    public function setOptions(array $opts = [])
     {
         $this->_opts = array_merge($this->_opts, $opts);
 
         // Ensure we have a logger object.
-        if (!isset($this->_opts['logger']) ||
-            !($this->_opts['logger'] instanceof Horde_Log_Logger)) {
+        if (!isset($this->_opts['logger'])
+            || !($this->_opts['logger'] instanceof Horde_Log_Logger)) {
             $this->_opts['logger'] = new Horde_Log_Logger(
                 new Horde_Log_Handler_Null()
             );
