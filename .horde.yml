@@ -6,8 +6,7 @@ description: A library that wraps various CSS minification backends.
 list: dev
 type: library
 authors:
-  -
-    name: Michael Slusarz
+  - name: Michael Slusarz
     user: slusarz
     email: slusarz@horde.org
     active: false
@@ -35,3 +34,34 @@ quality:
     level: 9
 vendor: horde
 keywords: []
+ci-platform:
+  '8.0':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.1':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.2':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.3':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.4':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.5':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+  '8.6':
+    - php: ^8.1
+    - ext-dom
+    - ext-iconv
+ci-platform-flags:
+  needs_installer_plugin: false
