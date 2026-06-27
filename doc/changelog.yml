@@ -1,56 +1,14 @@
 ---
-2.0.0alpha5:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2022-11-04
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |+
-2.0.0alpha4:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2022-11-04
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [rla] Enable PHP 8.x compat.
-    |+
-2.0.0alpha3:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2021-03-13
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |+
-2.0.0alpha2:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2021-02-24
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |+
-2.0.0alpha1:
-  api: 2.0.0alpha1
+2.0.0:
+  api: 2.0.0
   state:
     release: stable
     api: stable
-  date: 2021-02-24
+  date: 2026-06-27
   license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: ~
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: "chore: refresh qc fixes and platform deps\nchore: Update workflow dependency"
 2.0.0-beta6:
   api: 2.0.0-beta6
   state:
@@ -60,8 +18,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    fix: Apply dataurl callback if provided
+  notes: 'fix: Apply dataurl callback if provided'
 2.0.0-beta5:
   api: 2.0.0-beta5
   state:
@@ -71,11 +28,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    test: Modernize suite and test bug #1
-    fix: CSS Minifier issue with the cached elements in different output dir
-    style: lib
-    style: Apply php-cs-fixer to lib/
+  notes: "test: Modernize suite and test bug #1\nfix: CSS Minifier issue with the cached elements in different output dir\nstyle: lib\nstyle: Apply php-cs-fixer to lib/"
 2.0.0-beta4:
   api: 2.0.0-beta4
   state:
@@ -85,8 +38,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    test: Upgrade and enhance unit tests for PHPUnit 11-13
+  notes: 'test: Upgrade and enhance unit tests for PHPUnit 11-13'
 2.0.0-beta3:
   api: 2.0.0-beta3
   state:
@@ -96,9 +48,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    feat: Provide renovated and more complete API based on renovated horde/css_parser API
-    docs: Document architecture violation: Sabberworm usage not wrapped by horde/css_parser
+  notes: "feat: Provide renovated and more complete API based on renovated horde/css_parser API\ndocs: Document architecture violation: Sabberworm usage not wrapped by horde/css_parser"
 2.0.0-beta1:
   api: 2.0.0-beta1
   state:
@@ -109,6 +59,56 @@
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
   notes: Development mode for CssMinify-2.0.0alpha5
+2.0.0alpha5:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2022-11-04
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: ''
+2.0.0alpha4:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2022-11-04
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[rla] Enable PHP 8.x compat.\n|+\n"
+2.0.0alpha3:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-03-13
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: ''
+2.0.0alpha2:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-02-24
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: ''
+2.0.0alpha1:
+  api: 2.0.0alpha1
+  state:
+    release: stable
+    api: stable
+  date: 2021-02-24
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: null
 1.0.4:
   api: 1.0.0
   state:
@@ -118,8 +118,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Mark PHP 7 as supported.
+  notes: "[jan] Mark PHP 7 as supported.\n"
 1.0.3:
   api: 1.0.0
   state:
@@ -129,8 +128,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix minifying @font-face src attributes.
+  notes: "[jan] Fix minifying @font-face src attributes.\n"
 1.0.2:
   api: 1.0.0
   state:
@@ -140,8 +138,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mms] Correctly handle full URLs in background-* properties.
+  notes: "[mms] Correctly handle full URLs in background-* properties.\n"
 1.0.1:
   api: 1.0.0
   state:
@@ -151,8 +148,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mms] Fix Horde_CssMinify_CssParser#setOptions().
+  notes: "[mms] Fix Horde_CssMinify_CssParser#setOptions().\n"
 1.0.0:
   api: 1.0.0
   state:
@@ -162,5 +158,4 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mms] Initial release.
+  notes: "[mms] Initial release.\n"
